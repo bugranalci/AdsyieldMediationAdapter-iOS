@@ -1,24 +1,24 @@
 # AdsYield Mediation Adapter for iOS
 
-AdsYield Mediation Adapter, Google AdMob ve Google Ad Manager mediation ile AdsYield demand'ini iOS uygulamanıza entegre etmenizi sağlar.
+AdsYield Mediation Adapter enables publishers to integrate AdsYield demand into their iOS apps through Google AdMob or Google Ad Manager mediation.
 
-## Kurulum
+## Installation
 
-### CocoaPods ile
+### CocoaPods
 
-Podfile dosyanıza ekleyin:
+Add to your Podfile:
 
 ```ruby
 pod 'AdsYieldAdapter', '~> 1.0'
 ```
 
-Ardından çalıştırın:
+Then run:
 
 ```bash
 pod install
 ```
 
-## Desteklenen Formatlar
+## Supported Formats
 
 - Banner (320x50, 300x250, Adaptive)
 - Interstitial
@@ -26,22 +26,56 @@ pod install
 - Rewarded Interstitial
 - Native
 
-## Gereksinimler
+## Requirements
 
 - iOS 13.0+
 - Xcode 15.0+
 - Swift 5
 - Google Mobile Ads SDK 12.5+
 
-## AdMob Custom Event Ayarları
+## AdMob / GAM Custom Event Configuration
 
-- **Class Name:** `AdsYieldAdapter.AdsYieldCustomEvent`
-- **Parameter:** AdsYield tarafından sağlanan Ad Unit ID
+| Field | Value |
+|-------|-------|
+| **Class Name** | `AdsYieldAdapter.AdsYieldCustomEvent` |
+| **Parameter** | Ad Unit ID provided by AdsYield |
 
-## Dokümantasyon
+## Quick Start
 
-Detaylı entegrasyon rehberi için [docs/ENTEGRASYON_REHBERI.md](docs/ENTEGRASYON_REHBERI.md) dosyasına bakın.
+**1.** Initialize SDK in `AppDelegate.swift`:
 
-## Lisans
+```swift
+import GoogleMobileAds
+
+MobileAds.shared.start()
+```
+
+**2.** Add to `Info.plist`:
+
+```xml
+<key>GADApplicationIdentifier</key>
+<string>YOUR_ADMOB_APP_ID</string>
+```
+
+**3.** Configure the custom event in AdMob/GAM console with the class name and parameter above.
+
+That's it. Your existing ad loading code works without any changes.
+
+## Documentation
+
+- [Entegrasyon Rehberi (TR)](docs/ENTEGRASYON_REHBERI.md)
+- [Integration Guide (EN)](docs/INTEGRATION_GUIDE.md)
+
+## Sample App
+
+See `AdsYieldAdapterSample/` for a working demo with all 5 ad formats.
+
+```bash
+cd AdsYieldAdapterSample
+pod install
+open AdsYieldAdapterSample.xcworkspace
+```
+
+## License
 
 Apache License 2.0
