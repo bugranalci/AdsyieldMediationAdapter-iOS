@@ -1,0 +1,8 @@
+platform :ios, '13.0'
+
+target 'AdsYieldAdapterSample' do
+  use_frameworks!
+
+  pod 'Google-Mobile-Ads-SDK', '~> 12.5'
+  pod 'AdsYieldAdapter', :git => 'https://github.com/bugranalci/AdsyieldMediationAdapter-iOS.git', :tag => '1.0.0'
+end
