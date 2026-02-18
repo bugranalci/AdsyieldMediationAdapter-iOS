@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   s.platform         = :ios
   s.ios.deployment_target = '13.0'
   s.swift_versions   = ['5']
+  s.static_framework = true
 
   s.source_files     = 'AdsYieldAdapter/Sources/**/*.swift'
 

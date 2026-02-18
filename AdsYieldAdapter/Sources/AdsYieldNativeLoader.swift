@@ -16,7 +16,7 @@ class AdsYieldNativeLoader: NSObject, MediationNativeAd {
     }
 
     var images: [NativeAdImage]? {
-        return nativeAd?.images?.map { NativeAdImage(image: $0.image ?? UIImage()) } ?? nil
+        return nativeAd?.images
     }
 
     var body: String? {
@@ -24,8 +24,7 @@ class AdsYieldNativeLoader: NSObject, MediationNativeAd {
     }
 
     var icon: NativeAdImage? {
-        guard let iconImage = nativeAd?.icon?.image else { return nil }
-        return NativeAdImage(image: iconImage)
+        return nativeAd?.icon
     }
 
     var callToAction: String? {
@@ -57,11 +56,10 @@ class AdsYieldNativeLoader: NSObject, MediationNativeAd {
     }
 
     var mediaView: UIView? {
-        return nativeAd?.mediaContent.mainImage != nil ? nativeAd?.mediaContent.mainImage.flatMap { _ in
-            let view = MediaView()
-            view.mediaContent = nativeAd?.mediaContent
-            return view
-        } : nil
+        guard let mediaContent = nativeAd?.mediaContent else { return nil }
+        let view = MediaView()
+        view.mediaContent = mediaContent
+        return view
     }
 
     var hasVideoContent: Bool {
@@ -102,15 +100,6 @@ class AdsYieldNativeLoader: NSObject, MediationNativeAd {
     func didRecordImpression() {
         NSLog("[%@] Native ad impression recorded.", AdsYieldCustomEvent.TAG)
         delegate?.reportImpression()
-    }
-
-    func didRecordClickOnAsset(
-        withName assetName: NativeAssetIdentifier,
-        view: UIView,
-        viewController: UIViewController
-    ) {
-        NSLog("[%@] Native ad clicked.", AdsYieldCustomEvent.TAG)
-        delegate?.reportClick()
     }
 
     func didUntrackView(_ view: UIView?) {

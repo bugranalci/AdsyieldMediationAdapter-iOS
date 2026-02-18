@@ -6,7 +6,7 @@ import UIKit
 /// using the Google Mobile Ads SDK.
 ///
 /// Register this class in AdMob/GAM as: AdsYieldAdapter.AdsYieldCustomEvent
-@objc public class AdsYieldCustomEvent: NSObject, MediationAdapter {
+@objc public final class AdsYieldCustomEvent: NSObject, MediationAdapter {
 
     static let TAG = "AdsYieldAdapter"
     static let adapterVersionString = "1.0.0.0"
@@ -22,16 +22,7 @@ import UIKit
     // MARK: - GADMediationAdapter Protocol
 
     public static func adSDKVersion() -> VersionNumber {
-        let versionString = MobileAdsGlobal.sdkVersion
-        let components = versionString.components(separatedBy: ".")
-        if components.count >= 3 {
-            return VersionNumber(
-                majorVersion: Int(components[0]) ?? 0,
-                minorVersion: Int(components[1]) ?? 0,
-                patchVersion: Int(components[2]) ?? 0
-            )
-        }
-        return VersionNumber()
+        return MobileAds.shared.versionNumber
     }
 
     public static func adapterVersion() -> VersionNumber {
@@ -50,8 +41,8 @@ import UIKit
         return nil
     }
 
-    public static func setUpWith(
-        _ configuration: MediationServerConfiguration,
+    public static func setUp(
+        with configuration: MediationServerConfiguration,
         completionHandler: @escaping GADMediationAdapterSetUpCompletionBlock
     ) {
         // Pass-through adapter - no SDK initialization needed.
